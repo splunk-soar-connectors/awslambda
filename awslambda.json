@@ -14,7 +14,7 @@
     "utctime_updated": "2021-11-10T06:18:50.000000Z",
     "package_name": "phantom_awslambda",
     "main_module": "awslambda_connector.py",
-    "min_phantom_version": "4.9.39220",
+    "min_phantom_version": "4.10.0.40961",
     "python_version": "3",
     "latest_tested_versions": [
         "Cloud API, September 13, 2021"
