@@ -15,22 +15,23 @@
 #
 #
 # Phantom App imports
+import ast
+import base64
+import json
+from datetime import datetime
+
+import botocore.paginate as bp
+import botocore.response as br
 import phantom.app as phantom
-from phantom.base_connector import BaseConnector
+import requests
+import six
+from boto3 import Session, client
+from botocore.config import Config
 from phantom.action_result import ActionResult
+from phantom.base_connector import BaseConnector
 
 # Usage of the consts file is recommended
 from awslambda_consts import *
-from boto3 import client, Session
-from datetime import datetime
-from botocore.config import Config
-import botocore.response as br
-import botocore.paginate as bp
-import requests
-import json
-import base64
-import six
-import ast
 
 
 class RetVal(tuple):
@@ -444,8 +445,9 @@ class AwsLambdaConnector(BaseConnector):
 
 if __name__ == '__main__':
 
-    import pudb
     import argparse
+
+    import pudb
 
     pudb.set_trace()
 
