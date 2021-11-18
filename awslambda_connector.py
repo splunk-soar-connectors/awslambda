@@ -1,25 +1,37 @@
 # File: awslambda_connector.py
+#
 # Copyright (c) 2019-2021 Splunk Inc.
 #
-# Licensed under Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0.txt)
-
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software distributed under
+# the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+# either express or implied. See the License for the specific language governing permissions
+# and limitations under the License.
+#
+#
 # Phantom App imports
+import ast
+import base64
+import json
+from datetime import datetime
+
+import botocore.paginate as bp
+import botocore.response as br
 import phantom.app as phantom
-from phantom.base_connector import BaseConnector
+import requests
+import six
+from boto3 import Session, client
+from botocore.config import Config
 from phantom.action_result import ActionResult
+from phantom.base_connector import BaseConnector
 
 # Usage of the consts file is recommended
 from awslambda_consts import *
-from boto3 import client, Session
-from datetime import datetime
-from botocore.config import Config
-import botocore.response as br
-import botocore.paginate as bp
-import requests
-import json
-import base64
-import six
-import ast
 
 
 class RetVal(tuple):
@@ -433,8 +445,9 @@ class AwsLambdaConnector(BaseConnector):
 
 if __name__ == '__main__':
 
-    import pudb
     import argparse
+
+    import pudb
 
     pudb.set_trace()
 
