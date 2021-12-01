@@ -15,6 +15,7 @@
     "package_name": "phantom_awslambda",
     "main_module": "awslambda_connector.py",
     "min_phantom_version": "5.0.0",
+    "fips_compliant": true,
     "python_version": "3",
     "latest_tested_versions": [
         "Cloud API, September 13, 2021"
