@@ -2,7 +2,7 @@
 # AWS Lambda
 
 Publisher: Splunk  
-Connector Version: 2\.2\.5  
+Connector Version: 2\.2\.6  
 Product Vendor: AWS  
 Product Name: Lambda  
 Product Version Supported (regex): "\.\*"  
