@@ -2,11 +2,11 @@
 # AWS Lambda
 
 Publisher: Splunk  
-Connector Version: 2\.2\.5  
+Connector Version: 2\.2\.9  
 Product Vendor: AWS  
 Product Name: Lambda  
 Product Version Supported (regex): "\.\*"  
-Minimum Product Version: 5\.0\.0  
+Minimum Product Version: 5\.1\.0  
 
 This app integrates with AWS Lambda to perform lambda functions
 
