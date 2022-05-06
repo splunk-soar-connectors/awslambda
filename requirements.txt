@@ -1,3 +1,4 @@
+backoff==2.0.1
 boto3==1.17.30
 docutils==0.18
 requests==2.25.0
