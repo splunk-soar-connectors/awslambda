@@ -3,11 +3,6 @@ Copyright (c) 2019-2022 Splunk Inc.
 
 Third-party Software Attributions:
 
-Library: backoff
-Version: 2.0.1
-License: MIT
-Copyright 2014 litl, LLC
-
 Library: boto3
 Version: 1.17.30
 License: Apache 2.0
