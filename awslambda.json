@@ -14,7 +14,7 @@
     "utctime_updated": "2022-02-04T17:14:48.000000Z",
     "package_name": "phantom_awslambda",
     "main_module": "awslambda_connector.py",
-    "min_phantom_version": "5.3.0",
+    "min_phantom_version": "5.5.0",
     "fips_compliant": true,
     "python_version": "3",
     "latest_tested_versions": [
