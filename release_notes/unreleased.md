@@ -1,3 +1,1 @@
 **Unreleased**
-* Updated dependencies
-* Minimum SOAR version is now 6.1.1
