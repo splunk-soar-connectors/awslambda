@@ -21,38 +21,6 @@
         "Cloud API, September 13, 2021"
     ],
     "app_wizard_version": "1.0.0",
-    "pip3_dependencies": {
-        "wheel": [
-            {
-                "module": "boto3",
-                "input_file": "wheels/shared/boto3-1.17.30-py2.py3-none-any.whl"
-            },
-            {
-                "module": "botocore",
-                "input_file": "wheels/shared/botocore-1.20.112-py2.py3-none-any.whl"
-            },
-            {
-                "module": "jmespath",
-                "input_file": "wheels/shared/jmespath-0.10.0-py2.py3-none-any.whl"
-            },
-            {
-                "module": "python_dateutil",
-                "input_file": "wheels/shared/python_dateutil-2.8.2-py2.py3-none-any.whl"
-            },
-            {
-                "module": "s3transfer",
-                "input_file": "wheels/shared/s3transfer-0.3.7-py2.py3-none-any.whl"
-            },
-            {
-                "module": "six",
-                "input_file": "wheels/shared/six-1.16.0-py2.py3-none-any.whl"
-            },
-            {
-                "module": "urllib3",
-                "input_file": "wheels/shared/urllib3-1.26.18-py2.py3-none-any.whl"
-            }
-        ]
-    },
     "configuration": {
         "access_key": {
             "description": "Access Key",
@@ -1143,7 +1111,7 @@
             "versions": "EQ(*)"
         }
     ],
-    "pip39_dependencies": {
+    "pip_dependencies": {
         "wheel": [
             {
                 "module": "boto3",
@@ -1152,10 +1120,6 @@
             {
                 "module": "botocore",
                 "input_file": "wheels/shared/botocore-1.20.112-py2.py3-none-any.whl"
-            },
-            {
-                "module": "docutils",
-                "input_file": "wheels/shared/docutils-0.18-py2.py3-none-any.whl"
             },
             {
                 "module": "jmespath",
@@ -1171,11 +1135,11 @@
             },
             {
                 "module": "six",
-                "input_file": "wheels/shared/six-1.15.0-py2.py3-none-any.whl"
+                "input_file": "wheels/shared/six-1.16.0-py2.py3-none-any.whl"
             },
             {
                 "module": "urllib3",
-                "input_file": "wheels/shared/urllib3-1.26.16-py2.py3-none-any.whl"
+                "input_file": "wheels/shared/urllib3-1.26.18-py2.py3-none-any.whl"
             }
         ]
     }
