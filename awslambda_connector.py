@@ -92,6 +92,7 @@ class AwsLambdaConnector(BaseConnector):
         return cur_obj
 
     def _make_boto_call(self, action_result, method, paginate=False, empty_payload=False, **kwargs):
+
         if paginate is False:
             try:
                 boto_func = getattr(self._client, method)
