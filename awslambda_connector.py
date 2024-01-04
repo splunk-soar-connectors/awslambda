@@ -1,6 +1,6 @@
 # File: awslambda_connector.py
 #
-# Copyright (c) 2019-2023 Splunk Inc.
+# Copyright (c) 2019-2024 Splunk Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import botocore.paginate as bp
 import botocore.response as br
 import phantom.app as phantom
 import requests
+import six
 from boto3 import Session, client
 from botocore.config import Config
 from phantom.action_result import ActionResult
@@ -62,7 +63,7 @@ class AwsLambdaConnector(BaseConnector):
 
         if isinstance(cur_obj, dict):
             new_dict = {}
-            for k, v in cur_obj.items():
+            for k, v in six.iteritems(cur_obj):
                 if isinstance(v, br.StreamingBody):
                     content = v.read()
                     new_dict[k] = json.loads(content)
