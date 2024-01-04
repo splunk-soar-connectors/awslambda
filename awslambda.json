@@ -1122,6 +1122,10 @@
                 "input_file": "wheels/shared/botocore-1.20.112-py2.py3-none-any.whl"
             },
             {
+                "module": "docutils",
+                "input_file": "wheels/shared/docutils-0.18-py2.py3-none-any.whl"
+            },
+            {
                 "module": "jmespath",
                 "input_file": "wheels/shared/jmespath-0.10.0-py2.py3-none-any.whl"
             },
@@ -1135,7 +1139,7 @@
             },
             {
                 "module": "six",
-                "input_file": "wheels/shared/six-1.16.0-py2.py3-none-any.whl"
+                "input_file": "wheels/shared/six-1.15.0-py2.py3-none-any.whl"
             },
             {
                 "module": "urllib3",
