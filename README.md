@@ -6,7 +6,7 @@ Connector Version: 2.2.7
 Product Vendor: AWS  
 Product Name: Lambda  
 Product Version Supported (regex): ".\*"  
-Minimum Product Version: 6.1.1  
+Minimum Product Version: 5.0.0  
 
 This app integrates with AWS Lambda to perform lambda functions
 
