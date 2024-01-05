@@ -1,6 +1,6 @@
 # File: awslambda_connector.py
 #
-# Copyright (c) 2019-2022 Splunk Inc.
+# Copyright (c) 2019-2024 Splunk Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -93,6 +93,7 @@ class AwsLambdaConnector(BaseConnector):
 
     def _make_boto_call(self, action_result, method, paginate=False, empty_payload=False, **kwargs):
 
+        self.debug_print('Making call to {}'.format(method))
         if paginate is False:
             try:
                 boto_func = getattr(self._client, method)
