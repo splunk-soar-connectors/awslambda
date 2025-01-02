@@ -9,7 +9,7 @@
     "product_name": "Lambda",
     "product_version_regex": ".*",
     "publisher": "Splunk",
-    "license": "Copyright (c) 2019-2024 Splunk Inc.",
+    "license": "Copyright (c) 2019-2025 Splunk Inc.",
     "app_version": "2.2.8",
     "utctime_updated": "2024-06-12T06:50:44.000000Z",
     "package_name": "phantom_awslambda",
