@@ -1,6 +1,6 @@
 # File: awslambda_connector.py
 #
-# Copyright (c) 2019-2024 Splunk Inc.
+# Copyright (c) 2019-2025 Splunk Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -87,13 +87,13 @@ class AwsLambdaConnector(BaseConnector):
                     new_dict.update(page)
                 return new_dict
             except Exception as e:
-                return { 'error': e }
+                return {"error": e}
 
         return cur_obj
 
     def _make_boto_call(self, action_result, method, paginate=False, empty_payload=False, **kwargs):
 
-        self.debug_print('Making call to {}'.format(method))
+        self.debug_print("Making call to {}".format(method))
         if paginate is False:
             try:
                 boto_func = getattr(self._client, method)
@@ -102,16 +102,16 @@ class AwsLambdaConnector(BaseConnector):
             try:
                 resp_json = boto_func(**kwargs)
                 if empty_payload:
-                    resp_json['Payload'] = {'body': "", 'statusCode': resp_json['StatusCode']}
+                    resp_json["Payload"] = {"body": "", "statusCode": resp_json["StatusCode"]}
             except Exception as e:
                 exception_message = e.args[0].strip()
-                return RetVal(action_result.set_status(phantom.APP_ERROR, 'boto3 call to Lambda failed', exception_message), None)
+                return RetVal(action_result.set_status(phantom.APP_ERROR, "boto3 call to Lambda failed", exception_message), None)
         else:
             try:
                 paginator = self._client.get_paginator(method)
                 resp_json = paginator.paginate(**kwargs)
             except Exception as e:
-                return RetVal(action_result.set_status(phantom.APP_ERROR, 'boto3 call to Lambda failed', e), None)
+                return RetVal(action_result.set_status(phantom.APP_ERROR, "boto3 call to Lambda failed", e), None)
 
         return phantom.APP_SUCCESS, self._sanitize_data(resp_json)
 
@@ -129,34 +129,31 @@ class AwsLambdaConnector(BaseConnector):
 
         # Try getting and using temporary assume role credentials from parameters
         temp_credentials = dict()
-        if param and 'credentials' in param:
+        if param and "credentials" in param:
             try:
-                temp_credentials = ast.literal_eval(param['credentials'])
-                self._access_key = temp_credentials.get('AccessKeyId', '')
-                self._secret_key = temp_credentials.get('SecretAccessKey', '')
-                self._session_token = temp_credentials.get('SessionToken', '')
+                temp_credentials = ast.literal_eval(param["credentials"])
+                self._access_key = temp_credentials.get("AccessKeyId", "")
+                self._secret_key = temp_credentials.get("SecretAccessKey", "")
+                self._session_token = temp_credentials.get("SessionToken", "")
 
                 self.save_progress("Using temporary assume role credentials for action")
             except Exception as e:
-                return action_result.set_status(phantom.APP_ERROR,
-                                                "Failed to get temporary credentials:{0}".format(e))
+                return action_result.set_status(phantom.APP_ERROR, "Failed to get temporary credentials:{0}".format(e))
 
         try:
             if self._access_key and self._secret_key:
                 self.debug_print("Creating boto3 client with API keys")
                 self._client = client(
-                    'lambda',
+                    "lambda",
                     region_name=self._region,
                     aws_access_key_id=self._access_key,
                     aws_secret_access_key=self._secret_key,
                     aws_session_token=self._session_token,
-                    config=boto_config)
+                    config=boto_config,
+                )
             else:
                 self.debug_print("Creating boto3 client without API keys")
-                self._client = client(
-                    'lambda',
-                    region_name=self._region,
-                    config=boto_config)
+                self._client = client("lambda", region_name=self._region, config=boto_config)
         except Exception as e:
             return action_result.set_status(phantom.APP_ERROR, "Could not create boto3 client: {0}".format(e))
 
@@ -173,7 +170,7 @@ class AwsLambdaConnector(BaseConnector):
             return action_result.get_status()
 
         # make boto3 call
-        ret_val, resp_json = self._make_boto_call(action_result, 'list_functions', MaxItems=1)
+        ret_val, resp_json = self._make_boto_call(action_result, "list_functions", MaxItems=1)
 
         if phantom.is_fail(ret_val):
             self.save_progress("Test Connectivity Failed.")
@@ -195,36 +192,34 @@ class AwsLambdaConnector(BaseConnector):
         if not self._create_client(action_result, param):
             return action_result.get_status()
 
-        function_name = param['function_name']
-        invocation_type = param.get('invocation_type')
-        log_type = param.get('log_type')
-        client_context = param.get('client_context')
-        payload = param.get('payload')
-        qualifier = param.get('qualifier')
+        function_name = param["function_name"]
+        invocation_type = param.get("invocation_type")
+        log_type = param.get("log_type")
+        client_context = param.get("client_context")
+        payload = param.get("payload")
+        qualifier = param.get("qualifier")
         empty_payload = False
 
-        args = {
-            'FunctionName': function_name
-        }
+        args = {"FunctionName": function_name}
         if invocation_type:
-            args['InvocationType'] = invocation_type
+            args["InvocationType"] = invocation_type
         if log_type:
-            args['LogType'] = log_type
+            args["LogType"] = log_type
         if client_context:
             try:
-                args['ClientContext'] = base64.b64encode(str(client_context)).decode('utf-8')
+                args["ClientContext"] = base64.b64encode(str(client_context)).decode("utf-8")
             except TypeError:  # py3
-                args['ClientContext'] = base64.b64encode(client_context.encode('UTF-8')).decode('utf-8')
+                args["ClientContext"] = base64.b64encode(client_context.encode("UTF-8")).decode("utf-8")
         if payload:
-            args['Payload'] = payload
+            args["Payload"] = payload
         if qualifier:
-            args['Qualifier'] = qualifier
+            args["Qualifier"] = qualifier
 
-        if invocation_type == 'Event' or invocation_type == 'DryRun':
+        if invocation_type == "Event" or invocation_type == "DryRun":
             empty_payload = True
 
         # make boto3 call
-        ret_val, response = self._make_boto_call(action_result, 'invoke', False, empty_payload, **args)
+        ret_val, response = self._make_boto_call(action_result, "invoke", False, empty_payload, **args)
 
         if phantom.is_fail(ret_val):
             return action_result.get_status()
@@ -234,11 +229,11 @@ class AwsLambdaConnector(BaseConnector):
 
         # Add a dictionary that is made up of the most important values from data into the summary
         summary = action_result.update_summary({})
-        if response.get('FunctionError'):
-            summary['status'] = 'Lambda invoked and returned FunctionError'
+        if response.get("FunctionError"):
+            summary["status"] = "Lambda invoked and returned FunctionError"
             return action_result.set_status(phantom.APP_ERROR, "Lambda invoked and returned FunctionError")
         else:
-            summary['status'] = 'Successfully invoked lambda'
+            summary["status"] = "Successfully invoked lambda"
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
@@ -252,35 +247,35 @@ class AwsLambdaConnector(BaseConnector):
         if not self._create_client(action_result, param):
             return action_result.get_status()
 
-        function_version = param.get('function_version')
-        next_token = param.get('next_token')
-        max_items = param.get('max_items')
+        function_version = param.get("function_version")
+        next_token = param.get("next_token")
+        max_items = param.get("max_items")
 
         args = {}
         if function_version:
-            args['FunctionVersion'] = function_version
+            args["FunctionVersion"] = function_version
         if next_token:
-            args['Marker'] = next_token
+            args["Marker"] = next_token
         if max_items is not None:
-            args['MaxItems'] = int(max_items)
+            args["MaxItems"] = int(max_items)
 
         # make boto3 call
-        ret_val, response = self._make_boto_call(action_result, 'list_functions', **args)
+        ret_val, response = self._make_boto_call(action_result, "list_functions", **args)
 
         if phantom.is_fail(ret_val):
             return action_result.get_status()
 
-        if response.get('error', None) is not None:
-            return action_result.set_status(phantom.APP_ERROR, "{}".format(response.get('error')))
+        if response.get("error", None) is not None:
+            return action_result.set_status(phantom.APP_ERROR, "{}".format(response.get("error")))
 
         # Add the response into the data section
         action_result.add_data(response)
 
         # Add a dictionary that is made up of the most important values from data into the summary
         summary = action_result.update_summary({})
-        summary['num_functions'] = len(response.get('Functions', {}))
-        if response.get('NextMarker'):
-            summary['next_token'] = response.get('NextMarker', 'Unavailable')
+        summary["num_functions"] = len(response.get("Functions", {}))
+        if response.get("NextMarker"):
+            summary["next_token"] = response.get("NextMarker", "Unavailable")
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
@@ -294,35 +289,30 @@ class AwsLambdaConnector(BaseConnector):
         if not self._create_client(action_result, param):
             return action_result.get_status()
 
-        function_name = param['function_name']
-        statement_id = param['statement_id']
-        action = param['action']
-        principal = param['principal']
-        source_arn = param.get('source_arn')
-        source_account = param.get('source_account')
-        event_source_token = param.get('event_source_token')
-        qualifier = param.get('qualifier')
-        revision_id = param.get('revision_id')
+        function_name = param["function_name"]
+        statement_id = param["statement_id"]
+        action = param["action"]
+        principal = param["principal"]
+        source_arn = param.get("source_arn")
+        source_account = param.get("source_account")
+        event_source_token = param.get("event_source_token")
+        qualifier = param.get("qualifier")
+        revision_id = param.get("revision_id")
 
-        args = {
-            'FunctionName': function_name,
-            'StatementId': statement_id,
-            'Action': action,
-            'Principal': principal
-        }
+        args = {"FunctionName": function_name, "StatementId": statement_id, "Action": action, "Principal": principal}
         if source_arn:
-            args['SourceArn'] = source_arn
+            args["SourceArn"] = source_arn
         if source_account:
-            args['SourceAccount'] = source_account
+            args["SourceAccount"] = source_account
         if event_source_token:
-            args['EventSourceToken'] = event_source_token
+            args["EventSourceToken"] = event_source_token
         if qualifier:
-            args['Qualifier'] = qualifier
+            args["Qualifier"] = qualifier
         if revision_id:
-            args['RevisionId'] = revision_id
+            args["RevisionId"] = revision_id
 
         # make boto3 call
-        ret_val, response = self._make_boto_call(action_result, 'add_permission', **args)
+        ret_val, response = self._make_boto_call(action_result, "add_permission", **args)
 
         if phantom.is_fail(ret_val):
             return action_result.get_status()
@@ -332,7 +322,7 @@ class AwsLambdaConnector(BaseConnector):
 
         # Add a dictionary that is made up of the most important values from data into the summary
         summary = action_result.update_summary({})
-        summary['status'] = "Successfully added permission"
+        summary["status"] = "Successfully added permission"
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
@@ -345,23 +335,23 @@ class AwsLambdaConnector(BaseConnector):
         if not self._create_client(action_result, param):
             return action_result.get_status()
 
-        function_name = param['function_name']
-        statement_id = param['statement_id']
-        qualifier = param.get('qualifier')
-        revision_id = param.get('revision_id')
+        function_name = param["function_name"]
+        statement_id = param["statement_id"]
+        qualifier = param.get("qualifier")
+        revision_id = param.get("revision_id")
 
         args = {
-            'FunctionName': function_name,
-            'StatementId': statement_id,
+            "FunctionName": function_name,
+            "StatementId": statement_id,
         }
 
         if qualifier:
-            args['Qualifier'] = qualifier
+            args["Qualifier"] = qualifier
         if revision_id:
-            args['RevisionId'] = revision_id
+            args["RevisionId"] = revision_id
 
         # make boto3 call
-        ret_val, response = self._make_boto_call(action_result, 'remove_permission', **args)
+        ret_val, response = self._make_boto_call(action_result, "remove_permission", **args)
 
         if phantom.is_fail(ret_val):
             return action_result.get_status()
@@ -371,7 +361,7 @@ class AwsLambdaConnector(BaseConnector):
 
         # Add a dictionary that is made up of the most important values from data into the summary
         summary = action_result.update_summary({})
-        summary['status'] = "Successfully removed permission"
+        summary["status"] = "Successfully removed permission"
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
@@ -384,19 +374,19 @@ class AwsLambdaConnector(BaseConnector):
 
         self.debug_print("action_id", self.get_action_identifier())
 
-        if action_id == 'test_connectivity':
+        if action_id == "test_connectivity":
             ret_val = self._handle_test_connectivity(param)
 
-        elif action_id == 'invoke_lambda':
+        elif action_id == "invoke_lambda":
             ret_val = self._handle_invoke_lambda(param)
 
-        elif action_id == 'list_functions':
+        elif action_id == "list_functions":
             ret_val = self._handle_list_functions(param)
 
-        elif action_id == 'add_permission':
+        elif action_id == "add_permission":
             ret_val = self._handle_add_permission(param)
 
-        elif action_id == 'remove_permission':
+        elif action_id == "remove_permission":
             ret_val = self._handle_remove_permission(param)
 
         return ret_val
@@ -413,13 +403,13 @@ class AwsLambdaConnector(BaseConnector):
         self._region = LAMBDA_REGION_DICT.get(config[LAMBDA_JSON_REGION])
 
         self._proxy = {}
-        env_vars = config.get('_reserved_environment_variables', {})
-        if 'HTTP_PROXY' in env_vars:
-            self._proxy['http'] = env_vars['HTTP_PROXY']['value']
-        if 'HTTPS_PROXY' in env_vars:
-            self._proxy['https'] = env_vars['HTTPS_PROXY']['value']
+        env_vars = config.get("_reserved_environment_variables", {})
+        if "HTTP_PROXY" in env_vars:
+            self._proxy["http"] = env_vars["HTTP_PROXY"]["value"]
+        if "HTTPS_PROXY" in env_vars:
+            self._proxy["https"] = env_vars["HTTPS_PROXY"]["value"]
 
-        if config.get('use_role'):
+        if config.get("use_role"):
             credentials = self._handle_get_ec2_role()
             if not credentials:
                 return self.set_status(phantom.APP_ERROR, EC2_ROLE_CREDENTIALS_FAILURE_MSG)
@@ -444,7 +434,7 @@ class AwsLambdaConnector(BaseConnector):
         return phantom.APP_SUCCESS
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     import argparse
 
@@ -454,9 +444,9 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
 
-    argparser.add_argument('input_test_json', help='Input Test JSON file')
-    argparser.add_argument('-u', '--username', help='username', required=False)
-    argparser.add_argument('-p', '--password', help='password', required=False)
+    argparser.add_argument("input_test_json", help="Input Test JSON file")
+    argparser.add_argument("-u", "--username", help="username", required=False)
+    argparser.add_argument("-p", "--password", help="password", required=False)
 
     args = argparser.parse_args()
     session_id = None
@@ -468,6 +458,7 @@ if __name__ == '__main__':
 
         # User specified a username but not a password, so ask
         import getpass
+
         password = getpass.getpass("Password: ")
 
     if username and password:
@@ -475,20 +466,20 @@ if __name__ == '__main__':
         try:
             print("Accessing the Login page")
             r = requests.get(login_url, verify=False)
-            csrftoken = r.cookies['csrftoken']
+            csrftoken = r.cookies["csrftoken"]
 
             data = dict()
-            data['username'] = username
-            data['password'] = password
-            data['csrfmiddlewaretoken'] = csrftoken
+            data["username"] = username
+            data["password"] = password
+            data["csrfmiddlewaretoken"] = csrftoken
 
             headers = dict()
-            headers['Cookie'] = 'csrftoken=' + csrftoken
-            headers['Referer'] = login_url
+            headers["Cookie"] = "csrftoken=" + csrftoken
+            headers["Referer"] = login_url
 
             print("Logging into Platform to get the session id")
             r2 = requests.post(login_url, verify=False, data=data, headers=headers)
-            session_id = r2.cookies['sessionid']
+            session_id = r2.cookies["sessionid"]
         except Exception as e:
             print("Unable to get session id from the platform. Error: " + str(e))
             exit(1)
@@ -502,8 +493,8 @@ if __name__ == '__main__':
         connector.print_progress_message = True
 
         if session_id is not None:
-            in_json['user_session_token'] = session_id
-            connector._set_csrf_info(csrftoken, headers['Referer'])
+            in_json["user_session_token"] = session_id
+            connector._set_csrf_info(csrftoken, headers["Referer"])
 
         ret_val = connector._handle_action(json.dumps(in_json), None)
         print(json.dumps(json.loads(ret_val), indent=4))
