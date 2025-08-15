@@ -40,11 +40,9 @@ class RetVal(tuple):
 
 
 class AwsLambdaConnector(BaseConnector):
-
     def __init__(self):
-
         # Call the BaseConnectors init first
-        super(AwsLambdaConnector, self).__init__()
+        super().__init__()
 
         self._state = None
         self._region = None
@@ -54,7 +52,6 @@ class AwsLambdaConnector(BaseConnector):
         self._proxy = None
 
     def _sanitize_data(self, cur_obj):
-
         try:
             json.dumps(cur_obj)
             return cur_obj
@@ -92,13 +89,12 @@ class AwsLambdaConnector(BaseConnector):
         return cur_obj
 
     def _make_boto_call(self, action_result, method, paginate=False, empty_payload=False, **kwargs):
-
-        self.debug_print("Making call to {}".format(method))
+        self.debug_print(f"Making call to {method}")
         if paginate is False:
             try:
                 boto_func = getattr(self._client, method)
             except AttributeError:
-                return RetVal(action_result.set_status(phantom.APP_ERROR, "Invalid method: {0}".format(method)), None)
+                return RetVal(action_result.set_status(phantom.APP_ERROR, f"Invalid method: {method}"), None)
             try:
                 resp_json = boto_func(**kwargs)
                 if empty_payload:
@@ -116,13 +112,11 @@ class AwsLambdaConnector(BaseConnector):
         return phantom.APP_SUCCESS, self._sanitize_data(resp_json)
 
     def _handle_get_ec2_role(self):
-
         session = Session(region_name=self._region)
         credentials = session.get_credentials()
         return credentials
 
     def _create_client(self, action_result, param):
-
         boto_config = None
         if self._proxy:
             boto_config = Config(proxies=self._proxy)
@@ -138,7 +132,7 @@ class AwsLambdaConnector(BaseConnector):
 
                 self.save_progress("Using temporary assume role credentials for action")
             except Exception as e:
-                return action_result.set_status(phantom.APP_ERROR, "Failed to get temporary credentials:{0}".format(e))
+                return action_result.set_status(phantom.APP_ERROR, f"Failed to get temporary credentials:{e}")
 
         try:
             if self._access_key and self._secret_key:
@@ -155,12 +149,11 @@ class AwsLambdaConnector(BaseConnector):
                 self.debug_print("Creating boto3 client without API keys")
                 self._client = client("lambda", region_name=self._region, config=boto_config)
         except Exception as e:
-            return action_result.set_status(phantom.APP_ERROR, "Could not create boto3 client: {0}".format(e))
+            return action_result.set_status(phantom.APP_ERROR, f"Could not create boto3 client: {e}")
 
         return phantom.APP_SUCCESS
 
     def _handle_test_connectivity(self, param):
-
         # Add an action result object to self (BaseConnector) to represent the action for this param
         action_result = self.add_action_result(ActionResult(dict(param)))
 
@@ -181,10 +174,9 @@ class AwsLambdaConnector(BaseConnector):
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_invoke_lambda(self, param):
-
         # Implement the handler here
         # use self.save_progress(...) to send progress messages back to the platform
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
 
         # Add an action result object to self (BaseConnector) to represent the action for this param
         action_result = self.add_action_result(ActionResult(dict(param)))
@@ -238,8 +230,7 @@ class AwsLambdaConnector(BaseConnector):
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_list_functions(self, param):
-
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
 
         # Add an action result object to self (BaseConnector) to represent the action for this param
         action_result = self.add_action_result(ActionResult(dict(param)))
@@ -280,8 +271,7 @@ class AwsLambdaConnector(BaseConnector):
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_add_permission(self, param):
-
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
 
         # Add an action result object to self (BaseConnector) to represent the action for this param
         action_result = self.add_action_result(ActionResult(dict(param)))
@@ -327,8 +317,7 @@ class AwsLambdaConnector(BaseConnector):
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_remove_permission(self, param):
-
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
 
         action_result = self.add_action_result(ActionResult(dict(param)))
 
@@ -366,7 +355,6 @@ class AwsLambdaConnector(BaseConnector):
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def handle_action(self, param):
-
         ret_val = phantom.APP_SUCCESS
 
         # Get the action that we are supposed to execute for this App Run
@@ -392,7 +380,6 @@ class AwsLambdaConnector(BaseConnector):
         return ret_val
 
     def initialize(self):
-
         # Load the state in initialize, use it to store data
         # that needs to be accessed across actions
         self._state = self.load_state()
@@ -428,14 +415,12 @@ class AwsLambdaConnector(BaseConnector):
         return phantom.APP_SUCCESS
 
     def finalize(self):
-
         # Save the state, this data is saved across actions and app upgrades
         self.save_state(self._state)
         return phantom.APP_SUCCESS
 
 
 if __name__ == "__main__":
-
     import argparse
 
     import pudb
@@ -455,7 +440,6 @@ if __name__ == "__main__":
     password = args.password
 
     if username is not None and password is None:
-
         # User specified a username but not a password, so ask
         import getpass
 
