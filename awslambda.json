@@ -16,7 +16,7 @@
     "main_module": "awslambda_connector.py",
     "min_phantom_version": "6.3.0",
     "fips_compliant": true,
-    "python_version": "3",
+    "python_version": "3.9, 3.13",
     "latest_tested_versions": [
         "Cloud API, September 13, 2021"
     ],
@@ -1112,6 +1112,54 @@
         }
     ],
     "pip_dependencies": {
+        "wheel": [
+            {
+                "module": "boto3",
+                "input_file": "wheels/shared/boto3-1.17.30-py2.py3-none-any.whl"
+            },
+            {
+                "module": "botocore",
+                "input_file": "wheels/shared/botocore-1.20.112-py2.py3-none-any.whl"
+            },
+            {
+                "module": "docutils",
+                "input_file": "wheels/shared/docutils-0.18-py2.py3-none-any.whl"
+            },
+            {
+                "module": "jmespath",
+                "input_file": "wheels/shared/jmespath-0.10.0-py2.py3-none-any.whl"
+            },
+            {
+                "module": "s3transfer",
+                "input_file": "wheels/shared/s3transfer-0.3.7-py2.py3-none-any.whl"
+            }
+        ]
+    },
+    "pip39_dependencies": {
+        "wheel": [
+            {
+                "module": "boto3",
+                "input_file": "wheels/shared/boto3-1.17.30-py2.py3-none-any.whl"
+            },
+            {
+                "module": "botocore",
+                "input_file": "wheels/shared/botocore-1.20.112-py2.py3-none-any.whl"
+            },
+            {
+                "module": "docutils",
+                "input_file": "wheels/shared/docutils-0.18-py2.py3-none-any.whl"
+            },
+            {
+                "module": "jmespath",
+                "input_file": "wheels/shared/jmespath-0.10.0-py2.py3-none-any.whl"
+            },
+            {
+                "module": "s3transfer",
+                "input_file": "wheels/shared/s3transfer-0.3.7-py2.py3-none-any.whl"
+            }
+        ]
+    },
+    "pip313_dependencies": {
         "wheel": [
             {
                 "module": "boto3",
