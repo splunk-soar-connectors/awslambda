@@ -1,2 +1,2 @@
 boto3==1.17.30
-docutils==0.18
+docutils==0.22

@@ -1147,7 +1147,7 @@
             },
             {
                 "module": "docutils",
-                "input_file": "wheels/shared/docutils-0.18-py2.py3-none-any.whl"
+                "input_file": "wheels/py3/docutils-0.22-py3-none-any.whl"
             },
             {
                 "module": "jmespath",
@@ -1171,7 +1171,7 @@
             },
             {
                 "module": "docutils",
-                "input_file": "wheels/shared/docutils-0.18-py2.py3-none-any.whl"
+                "input_file": "wheels/py3/docutils-0.22-py3-none-any.whl"
             },
             {
                 "module": "jmespath",
