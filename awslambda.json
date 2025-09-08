@@ -1143,7 +1143,7 @@
             },
             {
                 "module": "botocore",
-                "input_file": "wheels/py3/botocore-1.40.11-py3-none-any.whl"
+                "input_file": "wheels/py3/botocore-1.40.25-py3-none-any.whl"
             },
             {
                 "module": "docutils",
@@ -1167,7 +1167,7 @@
             },
             {
                 "module": "botocore",
-                "input_file": "wheels/py3/botocore-1.40.11-py3-none-any.whl"
+                "input_file": "wheels/py3/botocore-1.40.25-py3-none-any.whl"
             },
             {
                 "module": "docutils",
