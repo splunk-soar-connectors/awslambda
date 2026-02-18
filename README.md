@@ -1,7 +1,7 @@
 # AWS Lambda
 
 Publisher: Splunk <br>
-Connector Version: 2.2.9 <br>
+Connector Version: 2.2.10 <br>
 Product Vendor: AWS <br>
 Product Name: Lambda <br>
 Minimum Product Version: 6.3.0
