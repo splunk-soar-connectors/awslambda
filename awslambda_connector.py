@@ -1,6 +1,6 @@
 # File: awslambda_connector.py
 #
-# Copyright (c) 2019-2025 Splunk Inc.
+# Copyright (c) 2019-2026 Splunk Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -167,7 +167,7 @@ class AwsLambdaConnector(BaseConnector):
             return action_result.get_status()
 
         # make boto3 call
-        ret_val, resp_json = self._make_boto_call(action_result, "list_functions", MaxItems=1)
+        ret_val, _resp_json = self._make_boto_call(action_result, "list_functions", MaxItems=1)
 
         if phantom.is_fail(ret_val):
             self.save_progress("Test Connectivity Failed.")
