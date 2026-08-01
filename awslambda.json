@@ -9,7 +9,7 @@
     "product_name": "Lambda",
     "product_version_regex": ".*",
     "publisher": "Splunk",
-    "license": "Copyright (c) 2019-2025 Splunk Inc.",
+    "license": "Copyright (c) 2019-2026 Splunk Inc.",
     "app_version": "2.2.10",
     "utctime_updated": "2026-02-18T23:07:33.572254Z",
     "package_name": "phantom_awslambda",
@@ -117,7 +117,7 @@
                 },
                 "credentials": {
                     "description": "Assumed role credentials",
-                    "data_type": "string",
+                    "data_type": "password",
                     "primary": true,
                     "contains": [
                         "aws credentials"
@@ -233,16 +233,6 @@
                     "column_order": 3
                 },
                 {
-                    "data_path": "action_result.parameter.credentials",
-                    "data_type": "string",
-                    "example_values": [
-                        "{'AccessKeyId': 'ASIASJL6ZZZZZ3M7QC2J', 'Expiration': '2020-12-09 22:28:04', 'SecretAccessKey': 'ZZZZZAmvLPictcVBPvjJx0d7MRezOuxiLCMZZZZZ', 'SessionToken': 'ZZZZZXIvYXdzEN///////////wEaDFRU0s4AVrw0k0oYICK4ATAzOqzAkg9bHY29lYmP59UvVOHjLufOy4s7SnAzOxGqGIXnukLis4TWNhrJl5R5nYyimrm6K/9d0Cw2SW9gO0ZRjEJHWJ+yY5Qk2QpWctS2BGn4n+G8cD6zEweCCMj+ScI5p8n7YI4wOdvXvOsVMmjV6F09Ujqr1w+NwoKXlglznXGs/7Q1kNZOMiioEhGUyoiHbQb37GCKslDK+oqe0KNaUKQ96YCepaLgMbMquDgdAM8I0TTxUO0o5ILF/gUyLT04R7QlOfktkdh6Qt0atTS+xeKi1hirKRizpJ8jjnxGQIikPRToL2v3ZZZZZZ=='}"
-                    ],
-                    "contains": [
-                        "aws credentials"
-                    ]
-                },
-                {
                     "data_path": "summary.total_objects",
                     "data_type": "numeric",
                     "example_values": [
@@ -318,7 +308,7 @@
                 },
                 "credentials": {
                     "description": "Assumed role credentials",
-                    "data_type": "string",
+                    "data_type": "password",
                     "primary": true,
                     "contains": [
                         "aws credentials"
@@ -338,16 +328,6 @@
                 {
                     "data_path": "action_result.parameter.client_context",
                     "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.parameter.credentials",
-                    "data_type": "string",
-                    "example_values": [
-                        "{'AccessKeyId': 'ASIASJL6ZZZZZ3M7QC2J', 'Expiration': '2020-12-09 22:28:04', 'SecretAccessKey': 'ZZZZZAmvLPictcVBPvjJx0d7MRezOuxiLCMZZZZZ', 'SessionToken': 'ZZZZZXIvYXdzEN///////////wEaDFRU0s4AVrw0k0oYICK4ATAzOqzAkg9bHY29lYmP59UvVOHjLufOy4s7SnAzOxGqGIXnukLis4TWNhrJl5R5nYyimrm6K/9d0Cw2SW9gO0ZRjEJHWJ+yY5Qk2QpWctS2BGn4n+G8cD6zEweCCMj+ScI5p8n7YI4wOdvXvOsVMmjV6F09Ujqr1w+NwoKXlglznXGs/7Q1kNZOMiioEhGUyoiHbQb37GCKslDK+oqe0KNaUKQ96YCepaLgMbMquDgdAM8I0TTxUO0o5ILF/gUyLT04R7QlOfktkdh6Qt0atTS+xeKi1hirKRizpJ8jjnxGQIikPRToL2v3ZZZZZZ=='}"
-                    ],
-                    "contains": [
-                        "aws credentials"
-                    ]
                 },
                 {
                     "data_path": "action_result.parameter.function_name",
@@ -591,7 +571,7 @@
                 },
                 "credentials": {
                     "description": "Assumed role credentials",
-                    "data_type": "string",
+                    "data_type": "password",
                     "primary": true,
                     "contains": [
                         "aws credentials"
@@ -606,16 +586,6 @@
                     "example_values": [
                         "success",
                         "failed"
-                    ]
-                },
-                {
-                    "data_path": "action_result.parameter.credentials",
-                    "data_type": "string",
-                    "example_values": [
-                        "{'AccessKeyId': 'ASIASJL6ZZZZZ3M7QC2J', 'Expiration': '2020-12-09 22:28:04', 'SecretAccessKey': 'ZZZZZAmvLPictcVBPvjJx0d7MRezOuxiLCMZZZZZ', 'SessionToken': 'ZZZZZXIvYXdzEN///////////wEaDFRU0s4AVrw0k0oYICK4ATAzOqzAkg9bHY29lYmP59UvVOHjLufOy4s7SnAzOxGqGIXnukLis4TWNhrJl5R5nYyimrm6K/9d0Cw2SW9gO0ZRjEJHWJ+yY5Qk2QpWctS2BGn4n+G8cD6zEweCCMj+ScI5p8n7YI4wOdvXvOsVMmjV6F09Ujqr1w+NwoKXlglznXGs/7Q1kNZOMiioEhGUyoiHbQb37GCKslDK+oqe0KNaUKQ96YCepaLgMbMquDgdAM8I0TTxUO0o5ILF/gUyLT04R7QlOfktkdh6Qt0atTS+xeKi1hirKRizpJ8jjnxGQIikPRToL2v3ZZZZZZ=='}"
-                    ],
-                    "contains": [
-                        "aws credentials"
                     ]
                 },
                 {
@@ -924,7 +894,7 @@
                 },
                 "credentials": {
                     "description": "Assumed role credentials",
-                    "data_type": "string",
+                    "data_type": "password",
                     "primary": true,
                     "contains": [
                         "aws credentials"
@@ -946,16 +916,6 @@
                     "data_type": "string",
                     "example_values": [
                         "lambda:InvokeFunction"
-                    ]
-                },
-                {
-                    "data_path": "action_result.parameter.credentials",
-                    "data_type": "string",
-                    "example_values": [
-                        "{'AccessKeyId': 'ASIASJL6ZZZZZ3M7QC2J', 'Expiration': '2020-12-09 22:28:04', 'SecretAccessKey': 'ZZZZZAmvLPictcVBPvjJx0d7MRezOuxiLCMZZZZZ', 'SessionToken': 'ZZZZZXIvYXdzEN///////////wEaDFRU0s4AVrw0k0oYICK4ATAzOqzAkg9bHY29lYmP59UvVOHjLufOy4s7SnAzOxGqGIXnukLis4TWNhrJl5R5nYyimrm6K/9d0Cw2SW9gO0ZRjEJHWJ+yY5Qk2QpWctS2BGn4n+G8cD6zEweCCMj+ScI5p8n7YI4wOdvXvOsVMmjV6F09Ujqr1w+NwoKXlglznXGs/7Q1kNZOMiioEhGUyoiHbQb37GCKslDK+oqe0KNaUKQ96YCepaLgMbMquDgdAM8I0TTxUO0o5ILF/gUyLT04R7QlOfktkdh6Qt0atTS+xeKi1hirKRizpJ8jjnxGQIikPRToL2v3ZZZZZZ=='}"
-                    ],
-                    "contains": [
-                        "aws credentials"
                     ]
                 },
                 {
@@ -1143,7 +1103,7 @@
             },
             {
                 "module": "botocore",
-                "input_file": "wheels/py3/botocore-1.40.55-py3-none-any.whl"
+                "input_file": "wheels/py3/botocore-1.40.76-py3-none-any.whl"
             },
             {
                 "module": "docutils",
@@ -1151,7 +1111,7 @@
             },
             {
                 "module": "jmespath",
-                "input_file": "wheels/py3/jmespath-1.0.1-py3-none-any.whl"
+                "input_file": "wheels/py3/jmespath-1.1.0-py3-none-any.whl"
             },
             {
                 "module": "s3transfer",
@@ -1167,7 +1127,7 @@
             },
             {
                 "module": "botocore",
-                "input_file": "wheels/py3/botocore-1.40.55-py3-none-any.whl"
+                "input_file": "wheels/py3/botocore-1.40.76-py3-none-any.whl"
             },
             {
                 "module": "docutils",
@@ -1175,7 +1135,7 @@
             },
             {
                 "module": "jmespath",
-                "input_file": "wheels/py3/jmespath-1.0.1-py3-none-any.whl"
+                "input_file": "wheels/py3/jmespath-1.1.0-py3-none-any.whl"
             },
             {
                 "module": "s3transfer",

@@ -57,7 +57,7 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 **statement_id** | required | Statement identifier of the permission to remove | string | |
 **qualifier** | optional | Specify a version or alias to remove permissions to a published version of the function | string | |
 **revision_id** | optional | Only update the policy if the revision ID matches the ID that's specified. Use this option to avoid modifying a function policy that has changed since you last read it | string | |
-**credentials** | optional | Assumed role credentials | string | `aws credentials` |
+**credentials** | optional | Assumed role credentials | password | `aws credentials` |
 
 #### Action Output
 
@@ -77,7 +77,6 @@ action_result.parameter.function_name | string | `lambda function name` `lambda 
 action_result.parameter.statement_id | string | | statement1 |
 action_result.parameter.qualifier | string | | |
 action_result.parameter.revision_id | string | | |
-action_result.parameter.credentials | string | `aws credentials` | {'AccessKeyId': 'ASIASJL6ZZZZZ3M7QC2J', 'Expiration': '2020-12-09 22:28:04', 'SecretAccessKey': 'ZZZZZAmvLPictcVBPvjJx0d7MRezOuxiLCMZZZZZ', 'SessionToken': 'ZZZZZXIvYXdzEN///////////wEaDFRU0s4AVrw0k0oYICK4ATAzOqzAkg9bHY29lYmP59UvVOHjLufOy4s7SnAzOxGqGIXnukLis4TWNhrJl5R5nYyimrm6K/9d0Cw2SW9gO0ZRjEJHWJ+yY5Qk2QpWctS2BGn4n+G8cD6zEweCCMj+ScI5p8n7YI4wOdvXvOsVMmjV6F09Ujqr1w+NwoKXlglznXGs/7Q1kNZOMiioEhGUyoiHbQb37GCKslDK+oqe0KNaUKQ96YCepaLgMbMquDgdAM8I0TTxUO0o5ILF/gUyLT04R7QlOfktkdh6Qt0atTS+xeKi1hirKRizpJ8jjnxGQIikPRToL2v3ZZZZZZ=='} |
 summary.total_objects | numeric | | 1 |
 summary.total_objects_successful | numeric | | 1 |
 
@@ -98,7 +97,7 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 **client_context** | optional | The JSON that you want to provide to your Lambda function in the context object | string | |
 **payload** | optional | The JSON that you want to provide to your Lambda function as input | string | |
 **qualifier** | optional | Specify a version or alias to invoke a published version of the function | string | |
-**credentials** | optional | Assumed role credentials | string | `aws credentials` |
+**credentials** | optional | Assumed role credentials | password | `aws credentials` |
 
 #### Action Output
 
@@ -106,7 +105,6 @@ DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
 --------- | ---- | -------- | --------------
 action_result.status | string | | success failed |
 action_result.parameter.client_context | string | | |
-action_result.parameter.credentials | string | `aws credentials` | {'AccessKeyId': 'ASIASJL6ZZZZZ3M7QC2J', 'Expiration': '2020-12-09 22:28:04', 'SecretAccessKey': 'ZZZZZAmvLPictcVBPvjJx0d7MRezOuxiLCMZZZZZ', 'SessionToken': 'ZZZZZXIvYXdzEN///////////wEaDFRU0s4AVrw0k0oYICK4ATAzOqzAkg9bHY29lYmP59UvVOHjLufOy4s7SnAzOxGqGIXnukLis4TWNhrJl5R5nYyimrm6K/9d0Cw2SW9gO0ZRjEJHWJ+yY5Qk2QpWctS2BGn4n+G8cD6zEweCCMj+ScI5p8n7YI4wOdvXvOsVMmjV6F09Ujqr1w+NwoKXlglznXGs/7Q1kNZOMiioEhGUyoiHbQb37GCKslDK+oqe0KNaUKQ96YCepaLgMbMquDgdAM8I0TTxUO0o5ILF/gUyLT04R7QlOfktkdh6Qt0atTS+xeKi1hirKRizpJ8jjnxGQIikPRToL2v3ZZZZZZ=='} |
 action_result.parameter.function_name | string | `lambda function name` `lambda function arn` | parsePhantomRegistrationEmail arn:aws:lambda:us-east-1:123456789012:function:example_helloworld |
 action_result.parameter.invocation_type | string | | RequestResponse |
 action_result.parameter.log_type | string | | None |
@@ -151,14 +149,13 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 **function_version** | optional | Set to 'ALL' to include entries for all published versions of each function | string | |
 **next_token** | optional | Specify the pagination token returned by previous request to retrieve next page of results | string | `lambda next token` |
 **max_items** | optional | A value between 1 and 50 to limit the number of functions to be returned | numeric | |
-**credentials** | optional | Assumed role credentials | string | `aws credentials` |
+**credentials** | optional | Assumed role credentials | password | `aws credentials` |
 
 #### Action Output
 
 DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
 --------- | ---- | -------- | --------------
 action_result.status | string | | success failed |
-action_result.parameter.credentials | string | `aws credentials` | {'AccessKeyId': 'ASIASJL6ZZZZZ3M7QC2J', 'Expiration': '2020-12-09 22:28:04', 'SecretAccessKey': 'ZZZZZAmvLPictcVBPvjJx0d7MRezOuxiLCMZZZZZ', 'SessionToken': 'ZZZZZXIvYXdzEN///////////wEaDFRU0s4AVrw0k0oYICK4ATAzOqzAkg9bHY29lYmP59UvVOHjLufOy4s7SnAzOxGqGIXnukLis4TWNhrJl5R5nYyimrm6K/9d0Cw2SW9gO0ZRjEJHWJ+yY5Qk2QpWctS2BGn4n+G8cD6zEweCCMj+ScI5p8n7YI4wOdvXvOsVMmjV6F09Ujqr1w+NwoKXlglznXGs/7Q1kNZOMiioEhGUyoiHbQb37GCKslDK+oqe0KNaUKQ96YCepaLgMbMquDgdAM8I0TTxUO0o5ILF/gUyLT04R7QlOfktkdh6Qt0atTS+xeKi1hirKRizpJ8jjnxGQIikPRToL2v3ZZZZZZ=='} |
 action_result.parameter.function_version | string | | |
 action_result.parameter.max_items | numeric | | 1 |
 action_result.parameter.next_token | string | `lambda next token` | 1234abcd12abab12ab12123456abcdef/c3sgqk3eiDRMkct7D8EmptWfHSXssPdS7Bo66iQPTMpVOHZgANewpgGgFGGr4pVjd6VgLUO6qPe1234abcd12abab12ab12123456abcdef/m0k5qVzizwoxFwvyruMbuMx9kADFACSslcabxXl3/jDI4rfFnIsUVdzTLBgPF1hzwrE1f3lcdkBvUp+QgY+Pn3w5QuJmwsp/di8COzFemY89GgOHbLNqsrBsgR/ee2eXoJp0ZkKM4EcBK3HokqBzefLfgR02PnfNOdXwqTlhkSPW0TKiKGIYu3Bw7lSNrLd+q3+wBGNLTnq7RWa21Xjxe5me9SyEscOWAwjnLEf9QpeMhWc+Qq9u3+IYyk7smjCWpIY371RST1llX0KIVaZkBn+agQ6cVvSAmBrKVEdtAzHROaivow8IdH2YG8FxvGmI5HkwSTf60OBM3jFrxw7v5OjCoId/ao6LBGYkuSAPF6YvgvwBdpgZeRmXfx9Iop3eaCNyLeGtKzLqVSOUwazScYgfAk= |
@@ -212,7 +209,7 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 **event_source_token** | optional | For Alexa Smart Home functions, a token that must be supplied by the invoker | string | |
 **qualifier** | optional | Specify a version or alias to add permissions to a published version of the function | string | |
 **revision_id** | optional | Only accepts the function's $LATEST revision ID. Use this option to avoid modifying a function policy that has changed since you last read it | string | |
-**credentials** | optional | Assumed role credentials | string | `aws credentials` |
+**credentials** | optional | Assumed role credentials | password | `aws credentials` |
 
 #### Action Output
 
@@ -220,7 +217,6 @@ DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
 --------- | ---- | -------- | --------------
 action_result.status | string | | success failed |
 action_result.parameter.action | string | | lambda:InvokeFunction |
-action_result.parameter.credentials | string | `aws credentials` | {'AccessKeyId': 'ASIASJL6ZZZZZ3M7QC2J', 'Expiration': '2020-12-09 22:28:04', 'SecretAccessKey': 'ZZZZZAmvLPictcVBPvjJx0d7MRezOuxiLCMZZZZZ', 'SessionToken': 'ZZZZZXIvYXdzEN///////////wEaDFRU0s4AVrw0k0oYICK4ATAzOqzAkg9bHY29lYmP59UvVOHjLufOy4s7SnAzOxGqGIXnukLis4TWNhrJl5R5nYyimrm6K/9d0Cw2SW9gO0ZRjEJHWJ+yY5Qk2QpWctS2BGn4n+G8cD6zEweCCMj+ScI5p8n7YI4wOdvXvOsVMmjV6F09Ujqr1w+NwoKXlglznXGs/7Q1kNZOMiioEhGUyoiHbQb37GCKslDK+oqe0KNaUKQ96YCepaLgMbMquDgdAM8I0TTxUO0o5ILF/gUyLT04R7QlOfktkdh6Qt0atTS+xeKi1hirKRizpJ8jjnxGQIikPRToL2v3ZZZZZZ=='} |
 action_result.parameter.event_source_token | string | | |
 action_result.parameter.function_name | string | `lambda function name` `lambda function arn` | example_helloworld |
 action_result.parameter.principal | string | | s3.amazonaws.com |
@@ -247,7 +243,7 @@ ______________________________________________________________________
 
 Auto-generated Splunk SOAR Connector documentation.
 
-Copyright 2025 Splunk Inc.
+Copyright 2026 Splunk Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
