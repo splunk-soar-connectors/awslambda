@@ -79,6 +79,7 @@ action_result.parameter.qualifier | string | | |
 action_result.parameter.revision_id | string | | |
 summary.total_objects | numeric | | 1 |
 summary.total_objects_successful | numeric | | 1 |
+action_result.parameter.credentials | password | `aws credentials` | |
 
 ## action: 'invoke lambda'
 
@@ -134,6 +135,7 @@ action_result.summary.status | string | | Successfully invoked lambda |
 action_result.message | string | | Status: Successfully invoked lambda |
 summary.total_objects | numeric | | 1 |
 summary.total_objects_successful | numeric | | 1 |
+action_result.parameter.credentials | password | `aws credentials` | |
 
 ## action: 'list functions'
 
@@ -188,6 +190,7 @@ action_result.summary.num_functions | numeric | | 1 |
 action_result.message | string | | Next token: 1234abcd12abab12ab12123456abcdef/c3sgqk3eiDRMkct7D8EmptWfHSXssPdS7Bo1234abcd-12ab-ab12-ab12-123456abcdefuNDBjUTxm8z6N28yhlUwEmKbrAV/m0k5qVzizwoxFwvyruMbuMx9kADFACSslcabxXl3/jDI4rfFnIsUVdzTLBgPF1hzwrE1f3lcdkBvUp+QgY+Pn3w5QuJmwsp/di8COzFemY89GgOHbLNqsrBsgR/ee2eXoJp0ZkKM4EcBK3HokqBzefLfgR02PnfNOdXwqTlhkSPW0TKiKGIYu3Bw7lSNrLd+q3+wBGNLTnq7RWa21Xjxe5me9SyEscOWAwjnLEf9QpeMhWc/irQe4ijLbCnEZbkbt3hmecsTkxYE/lu3VsPd27PAdH4m+u1lfY5PZHNIkqx2ocEw2Ya797ov+QmFZmKBzimXcyNnbWoE7Hp+nZOKcr2BiQK9SSuBCi2Y/wi1dQ0S5F0u/cv42hTH+ak59mYaNJQOl9NZ+wWD72kMC9GUEYigQs=, Num functions: 1 |
 summary.total_objects | numeric | | 1 |
 summary.total_objects_successful | numeric | | 1 |
+action_result.parameter.credentials | password | `aws credentials` | |
 
 ## action: 'add permission'
 
@@ -238,6 +241,7 @@ action_result.summary.status | string | | Successfully added permission |
 action_result.message | string | | Status: Successfully added permission |
 summary.total_objects | numeric | | 1 |
 summary.total_objects_successful | numeric | | 1 |
+action_result.parameter.credentials | password | `aws credentials` | |
 
 ______________________________________________________________________
 
