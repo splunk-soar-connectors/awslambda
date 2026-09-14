@@ -1,6 +1,6 @@
 # File: awslambda_connector.py
 #
-# Copyright (c) 2019-2025 Splunk Inc.
+# Copyright (c) 2019-2026 Splunk Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,6 +50,10 @@ class AwsLambdaConnector(BaseConnector):
         self._secret_key = None
         self._session_token = None
         self._proxy = None
+
+    @staticmethod
+    def _sanitize_action_parameters(param):
+        return {key: value for key, value in param.items() if key != "credentials"}
 
     def _sanitize_data(self, cur_obj):
         try:
@@ -155,7 +159,7 @@ class AwsLambdaConnector(BaseConnector):
 
     def _handle_test_connectivity(self, param):
         # Add an action result object to self (BaseConnector) to represent the action for this param
-        action_result = self.add_action_result(ActionResult(dict(param)))
+        action_result = self.add_action_result(ActionResult(self._sanitize_action_parameters(param)))
 
         self.save_progress("Querying AWS to check credentials")
 
@@ -163,7 +167,7 @@ class AwsLambdaConnector(BaseConnector):
             return action_result.get_status()
 
         # make boto3 call
-        ret_val, resp_json = self._make_boto_call(action_result, "list_functions", MaxItems=1)
+        ret_val, _resp_json = self._make_boto_call(action_result, "list_functions", MaxItems=1)
 
         if phantom.is_fail(ret_val):
             self.save_progress("Test Connectivity Failed.")
@@ -179,7 +183,7 @@ class AwsLambdaConnector(BaseConnector):
         self.save_progress(f"In action handler for: {self.get_action_identifier()}")
 
         # Add an action result object to self (BaseConnector) to represent the action for this param
-        action_result = self.add_action_result(ActionResult(dict(param)))
+        action_result = self.add_action_result(ActionResult(self._sanitize_action_parameters(param)))
 
         if not self._create_client(action_result, param):
             return action_result.get_status()
@@ -233,7 +237,7 @@ class AwsLambdaConnector(BaseConnector):
         self.save_progress(f"In action handler for: {self.get_action_identifier()}")
 
         # Add an action result object to self (BaseConnector) to represent the action for this param
-        action_result = self.add_action_result(ActionResult(dict(param)))
+        action_result = self.add_action_result(ActionResult(self._sanitize_action_parameters(param)))
 
         if not self._create_client(action_result, param):
             return action_result.get_status()
@@ -274,7 +278,7 @@ class AwsLambdaConnector(BaseConnector):
         self.save_progress(f"In action handler for: {self.get_action_identifier()}")
 
         # Add an action result object to self (BaseConnector) to represent the action for this param
-        action_result = self.add_action_result(ActionResult(dict(param)))
+        action_result = self.add_action_result(ActionResult(self._sanitize_action_parameters(param)))
 
         if not self._create_client(action_result, param):
             return action_result.get_status()
@@ -319,7 +323,7 @@ class AwsLambdaConnector(BaseConnector):
     def _handle_remove_permission(self, param):
         self.save_progress(f"In action handler for: {self.get_action_identifier()}")
 
-        action_result = self.add_action_result(ActionResult(dict(param)))
+        action_result = self.add_action_result(ActionResult(self._sanitize_action_parameters(param)))
 
         if not self._create_client(action_result, param):
             return action_result.get_status()
